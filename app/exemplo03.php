@@ -14,9 +14,15 @@
     </form>
 
     <h2>Alterar Dados</h2>
+    <?php
+    $id = null;
+    if (isset($_GET["id"])){
+        $id = $_GET["id"];
+    }
+    ?>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
         <label for="id">ID do Registro a ser alterado:</label><br>
-        <input type="text" id="id" name="id"><br>
+        <input type="text" id="id" name="id" value="<?php echo $id;?>"><br>
         <label for="nova_descricao">Nova Descrição:</label><br>
         <input type="text" id="nova_descricao" name="nova_descricao"><br><br>
         <input type="submit" value="Alterar">
@@ -27,6 +33,7 @@
         <tr>
             <th>ID</th>
             <th>Descrição</th>
+            <th>Ações</th>
             <th>Ações</th>
         </tr>
         <?php
@@ -91,6 +98,7 @@
                 echo "<tr>";
                 echo "<td>" . $row["tes_id"] . "</td>";
                 echo "<td>" . $row["tes_descricao"] . "</td>";
+                echo "<td><a href='exemplo03.php?id=" . $row["tes_id"] . "'>Editar</a></td>";
                 echo "<td>
                         <form action='" . htmlspecialchars($_SERVER["PHP_SELF"]) . "' method='POST' onsubmit='return confirm(\"Tem certeza que deseja excluir este registro?\");'>
                             <input type='hidden' name='excluir' value='" . $row["tes_id"] . "'>
