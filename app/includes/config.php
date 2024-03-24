@@ -1,6 +1,7 @@
 <?php
 	
     define('IS_INCLUDE',true);
+    define('IS_LOGOU',false);
     define('NOMESITE','Projeto - Sistema');
     
     //06051982 CONEXÕES DO BANCO;
