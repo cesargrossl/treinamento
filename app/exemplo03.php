@@ -6,6 +6,10 @@
     <title>Formulário PHP/MySQL</title>
 </head>
 <body>
+    <h1>Limpar</h1>
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+        <input type="submit" value="Limpar" onclick="window.location.reload();">
+    </form>
     <h2>Inserir Dados</h2>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
         <label for="descricao">Descrição:</label><br>
@@ -26,6 +30,7 @@
         <label for="nova_descricao">Nova Descrição:</label><br>
         <input type="text" id="nova_descricao" name="nova_descricao"><br><br>
         <input type="submit" value="Alterar">
+        
     </form>
 
     <h2>Dados Cadastrados</h2>
