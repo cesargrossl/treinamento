@@ -1,36 +1,63 @@
 <?php
-$modo = 'I';
-$nome = null;
-$cidade = null;
-$estado = null;
-$telefone = null;
-// Conexão com o banco de dados
-$host = "mysql"; // Host do MySQL
-$usuario = "root"; // Usuário do MySQL
-$senha = "5020@1223"; // Senha do MySQL
-$banco = "db_teste"; // Nome do banco de dados
+    $id = null;
+    $modo = 'I';
+    $nome = null;
+    $cidade = null;
+    $estado = null;
+    $telefone = null;
+    // Conexão com o banco de dados
+    $host = "mysql"; // Host do MySQL
+    $usuario = "root"; // Usuário do MySQL
+    $senha = "5020@1223"; // Senha do MySQL
+    $banco = "db_teste"; // Nome do banco de dados
 
-$conn = new mysqli($host, $usuario, $senha, $banco);
+    $conn = new mysqli($host, $usuario, $senha, $banco);
 
-// Verificar a conexão
-if ($conn->connect_error) {
-    die("Erro de conexão: " . $conn->connect_error);
-}
-if (isset($_POST["nome"])){
-    $nome = trim($_POST["nome"]);
-    $cidade = trim($_POST["cidade"]);
-    $estado = trim($_POST["estado"]);
-    $telefone = trim($_POST["telefone"]);
-    if ($modo == 'I'){
-        $sql_insert = "INSERT INTO tb_teste (tes_descricao, tes_telefone) VALUES ('$nome', '$telefone')";
-
-        if ($conn->query($sql_insert) === TRUE) {
-            echo "<p>Dados inseridos com sucesso!</p>";
-        } else {
-            echo "<p>Erro ao inserir dados: " . $conn->error . "</p>";
+    // Verificar a conexão
+    if ($conn->connect_error) {
+        die("Erro de conexão: " . $conn->connect_error);
+    }
+    if (isset($_GET["id"])){
+        $id  = $_GET["id"];
+        $sql_listar = "SELECT tes_descricao FROM tb_teste WHERE tes_id = '".$_GET["id"]."' ";
+        $result = $conn->query($sql_listar);
+        if ($result->num_rows > 0) {
+            $modo = 'U';
+            while ($row = $result->fetch_assoc()) {
+                $nome = $row["tes_descricao"];
+            }
         }
     }
-}
+    if (isset($_POST["nome"])){
+        $nome = trim($_POST["nome"]);
+        $id = trim($_POST["id"]);
+        $modo = trim($_POST["modo"]);
+        $cidade = trim($_POST["cidade"]);
+        $estado = trim($_POST["estado"]);
+        $telefone = trim($_POST["telefone"]);
+        $sql_listar = "SELECT tes_descricao FROM tb_teste WHERE tes_descricao = '".$nome."' ";
+        $result = $conn->query($sql_listar);
+        if ($result->num_rows > 0) {
+            $modo = 'U';
+        }
+        if ($modo == 'I'){
+            $sql_insert = "INSERT INTO tb_teste (tes_descricao, tes_telefone) VALUES ('$nome', '$telefone')";
+
+            if ($conn->query($sql_insert) === TRUE) {
+                echo "<p>Dados inseridos com sucesso!</p>";
+            } else {
+                echo "<p>Erro ao inserir dados: " . $conn->error . "</p>";
+            }
+        }elseif ($modo == 'U'){
+            $sql_update = "UPDATE tb_teste SET tes_descricao='$nome' WHERE tes_id=$id";
+            if ($conn->query($sql_update) === TRUE) {
+                echo "<p>Dados alterados com sucesso!</p>";
+            } else {
+                echo "<p>Erro ao alterar dados: " . $conn->error . "</p>";
+            }
+
+        }
+    }
 
 ?>
 
@@ -101,6 +128,8 @@ if (isset($_POST["nome"])){
     <div class="container">
         <h2>Formulário</h2>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+            <input type="text" id="modo" name="modo" value="<?php echo $modo;?>">
+            <input type="text" id="id" name="id" value="<?php echo $id;?>">
             <div class="form-group">
                 <label for="nome">Nome:</label>
                 <input type="text" id="nome" name="nome" value="<?php echo $nome;?>" required>
