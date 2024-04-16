@@ -1,3 +1,39 @@
+<?php
+$modo = 'I';
+$nome = null;
+$cidade = null;
+$estado = null;
+$telefone = null;
+// Conexão com o banco de dados
+$host = "mysql"; // Host do MySQL
+$usuario = "root"; // Usuário do MySQL
+$senha = "5020@1223"; // Senha do MySQL
+$banco = "db_teste"; // Nome do banco de dados
+
+$conn = new mysqli($host, $usuario, $senha, $banco);
+
+// Verificar a conexão
+if ($conn->connect_error) {
+    die("Erro de conexão: " . $conn->connect_error);
+}
+if (isset($_POST["nome"])){
+    $nome = trim($_POST["nome"]);
+    $cidade = trim($_POST["cidade"]);
+    $estado = trim($_POST["estado"]);
+    $telefone = trim($_POST["telefone"]);
+    if ($modo == 'I'){
+        $sql_insert = "INSERT INTO tb_teste (tes_descricao, tes_telefone) VALUES ('$nome', '$telefone')";
+
+        if ($conn->query($sql_insert) === TRUE) {
+            echo "<p>Dados inseridos com sucesso!</p>";
+        } else {
+            echo "<p>Erro ao inserir dados: " . $conn->error . "</p>";
+        }
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -64,24 +100,24 @@
 <body>
     <div class="container">
         <h2>Formulário</h2>
-        <form action="#">
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
             <div class="form-group">
                 <label for="nome">Nome:</label>
-                <input type="text" id="nome" name="nome" required>
+                <input type="text" id="nome" name="nome" value="<?php echo $nome;?>" required>
             </div>
             <div class="form-group">
                 <label for="cidade">Cidade:</label>
-                <input type="text" id="cidade" name="cidade" required>
+                <input type="text" id="cidade" name="cidade" value="<?php echo $cidade;?>">
             </div>
             <div class="form-group">
                 <label for="estado">Estado:</label>
-                <input type="text" id="estado" name="estado" required>
+                <input type="text" id="estado" name="estado" value="<?php echo $estado;?>">
             </div>
             <div class="form-group">
                 <label for="telefone">Telefone:</label>
-                <input type="tel" id="telefone" name="telefone" required>
+                <input type="tel" id="telefone" name="telefone" value="<?php echo $telefone;?>" >
             </div>
-            <button type="submit">Enviar</button>
+            <button type="submit">salvar</button>
         </form>
     </div>
 </body>
