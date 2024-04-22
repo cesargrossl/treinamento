@@ -17,45 +17,63 @@
     if ($conn->connect_error) {
         die("Erro de conexão: " . $conn->connect_error);
     }
-    if (isset($_GET["id"])){
-        $id  = $_GET["id"];
-        $sql_listar = "SELECT tes_descricao FROM tb_teste WHERE tes_id = '".$_GET["id"]."' ";
-        $result = $conn->query($sql_listar);
-        if ($result->num_rows > 0) {
-            $modo = 'U';
-            while ($row = $result->fetch_assoc()) {
-                $nome = $row["tes_descricao"];
+    if (isset($_POST["excluir"])){
+        $id_excluir = $_POST["excluir"];
+        $sql_excluir = "DELETE FROM tb_teste WHERE tes_id = $id_excluir";
+
+        if ($conn->query($sql_excluir) === TRUE) {
+            echo "<p>Dados excluídos com sucesso!</p>";
+        } else {
+            echo "<p>Erro ao excluir dados: " . $conn->error . "</p>";
+        }
+
+    }else{
+
+        if (isset($_GET["id"])){
+            $id  = $_GET["id"];
+            $sql_listar = "SELECT tes_descricao FROM tb_teste WHERE tes_id = '".$_GET["id"]."' ";
+            $result = $conn->query($sql_listar);
+            if ($result->num_rows > 0) {
+                $modo = 'U';
+                while ($row = $result->fetch_assoc()) {
+                    $nome = $row["tes_descricao"];
+                }
             }
         }
-    }
-    if (isset($_POST["nome"])){
-        $nome = trim($_POST["nome"]);
-        $id = trim($_POST["id"]);
-        $modo = trim($_POST["modo"]);
-        $cidade = trim($_POST["cidade"]);
-        $estado = trim($_POST["estado"]);
-        $telefone = trim($_POST["telefone"]);
-        $sql_listar = "SELECT tes_descricao FROM tb_teste WHERE tes_descricao = '".$nome."' ";
-        $result = $conn->query($sql_listar);
-        if ($result->num_rows > 0) {
-            $modo = 'U';
-        }
-        if ($modo == 'I'){
-            $sql_insert = "INSERT INTO tb_teste (tes_descricao, tes_telefone) VALUES ('$nome', '$telefone')";
-
-            if ($conn->query($sql_insert) === TRUE) {
-                echo "<p>Dados inseridos com sucesso!</p>";
-            } else {
-                echo "<p>Erro ao inserir dados: " . $conn->error . "</p>";
+        if (isset($_POST["nome"])){
+            $nome = trim($_POST["nome"]);
+            $id = trim($_POST["id"]);
+            $modo = trim($_POST["modo"]);
+            $cidade = trim($_POST["cidade"]);
+            $estado = trim($_POST["estado"]);
+            $telefone = trim($_POST["telefone"]);
+            if (!empty($id)){
+                $sql_listar = "SELECT tes_descricao FROM tb_teste WHERE tes_descricao = '".$nome."' ";
+                $result = $conn->query($sql_listar);
+                if ($result->num_rows > 0) {
+                    
+                    $modo = 'U';
+                }
             }
-        }elseif ($modo == 'U'){
-            $sql_update = "UPDATE tb_teste SET tes_descricao='$nome' WHERE tes_id=$id";
-            if ($conn->query($sql_update) === TRUE) {
-                echo "<p>Dados alterados com sucesso!</p>";
-            } else {
-                echo "<p>Erro ao alterar dados: " . $conn->error . "</p>";
-            }
+            if ($modo == 'I'){
 
+                $sql_insert = "INSERT INTO tb_teste (tes_descricao, tes_telefone) VALUES ('$nome', '$telefone')";
+
+                if ($conn->query($sql_insert) === TRUE) {
+                    echo "<p>Dados inseridos com sucesso!</p>";
+                } else {
+                    echo "<p>Erro ao inserir dados: " . $conn->error . "</p>";
+                }
+            }elseif ($modo == 'U'){
+
+                $sql_update = "UPDATE tb_teste SET tes_descricao='$nome' WHERE tes_id=$id";
+                if ($conn->query($sql_update) === TRUE) {
+                    echo "<p>Dados alterados com sucesso!</p>";
+                } else {
+                    echo "<p>Erro ao alterar dados: " . $conn->error . "</p>";
+                }
+
+            }
         }
     }
 
@@ -128,8 +146,8 @@
     <div class="container">
         <h2>Formulário</h2>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
-            <input type="text" id="modo" name="modo" value="<?php echo $modo;?>">
-            <input type="text" id="id" name="id" value="<?php echo $id;?>">
+            <input type="hidden" id="modo" name="modo" value="<?php echo $modo;?>">
+            <input type="hidden" id="id" name="id" value="<?php echo $id;?>">
             <div class="form-group">
                 <label for="nome">Nome:</label>
                 <input type="text" id="nome" name="nome" value="<?php echo $nome;?>" required>
@@ -147,6 +165,39 @@
                 <input type="tel" id="telefone" name="telefone" value="<?php echo $telefone;?>" >
             </div>
             <button type="submit">salvar</button>
+            <br>
+            <h2>Dados Cadastrados</h2>
+            <table border="1" width="100%">
+                <tr>
+                    <th>ID</th>
+                    <th>Descrição</th>
+                    <th>Ações</th>
+                    <th>Ações</th>
+                </tr>
+            <?php
+            // Listar dados cadastrados
+                $sql_listar = "SELECT * FROM tb_teste";
+                $result = $conn->query($sql_listar);
+
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<tr>";
+                        echo "<td>" . $row["tes_id"] . "</td>";
+                        echo "<td>" . $row["tes_descricao"] . "</td>";
+                        echo "<td><a href='exemplo04.php?id=" . $row["tes_id"] . "'>Editar</a></td>";
+                        echo "<td>
+                                <form action='" . htmlspecialchars($_SERVER["PHP_SELF"]) . "' method='POST' onsubmit='return confirm(\"Tem certeza que deseja excluir este registro?\");'>
+                                    <input type='hidden' name='excluir' value='" . $row["tes_id"] . "'>
+                                    <input type='submit' value='Excluir'>
+                                </form>
+                            </td>";
+                        echo "</tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='3'>Nenhum registro encontrado.</td></tr>";
+                }
+            ?>
+             </table>
         </form>
     </div>
 </body>
