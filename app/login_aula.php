@@ -1,5 +1,27 @@
+<?php
+// Inicia a sessão antes de qualquer saída para o navegador
+session_start();
+// Verifica se o formulário de login foi enviado
+if (isset($_POST["username"]) && isset($_POST["password"])) {
+    // Aqui você deve verificar as credenciais no banco de dados, mas por enquanto vamos usar credenciais fixas
+    $username = $_POST["username"];
+    $password = $_POST["password"];
 
+    // Verifica as credenciais
+    if ($username === 'CESAR' && $password === '1234') {
+        // Define as variáveis de sessão
+        $_SESSION["username"] = $username;
+        $_SESSION["logou"] = 'OK';
 
+        // Redireciona para a página home
+        echo "<script language=\"javascript\"> location.href='http://localhost/home.php';</script>";
+        exit; // Certifique-se de sair após o redirecionamento
+    } else {
+        // Credenciais inválidas, redireciona para a página de login novamente
+      echo 'Usuário ou senha invalidos';
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,7 +57,7 @@
         </div>
         <div class="form-group">
           <label for="password">Senha</label>
-          <input type="password" id="password" class="form-control" placeholder="Digite sua senha" required>
+          <input type="password" id="password" name="password"class="form-control" placeholder="Digite sua senha" required>
         </div>
         <div class="form-group">
           <button type="submit" class="btn btn-primary btn-block">Entrar</button>

@@ -1,3 +1,10 @@
+<?php
+session_start();
+if(!isset($_SESSION["logou"]) || $_SESSION["logou"] != 'OK') {
+  echo 'Favor fazer novo login';
+  die;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
