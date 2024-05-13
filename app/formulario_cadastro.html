@@ -1,0 +1,115 @@
+<!-- https://getbootstrap.com/ -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <title>Cadastro de usuário</title>
+    <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=-BNacmGq5s64LMMVZ0Ms_e6nRFSJXLFpoEacCTuM6JWSja4iKPzK0cRllL6cnxP1qG8j6HT65OqBooya1xphy6S4Uxb5JEwOLSpH-wM8Wok6jOQHXIT8I0odl9JX8A3jUMdm-ajsFuhUGE3b5rVXRiI-zYYSx0rhg2lylnQrQArGdvvLh6sLmWvTBBVNsEgb" charset="UTF-8"></script><link rel="stylesheet" crossorigin="anonymous" href="https://gc.kis.v2.scr.kaspersky-labs.com/E3E8934C-235A-4B0E-825A-35A08381A191/abn/main.css?attr=aHR0cHM6Ly93d3cudW5pdmlsbGUuZWR1LmJyL2NvbW11bml0eS8yMjItMWFuLmRldy0yMDI0LTEvVmlydHVhbERpc2suaHRtbC9kb3dubG9hZEZpbGUvMzcyOTQ1MC9mb3JtdWxhcmlvX2NhZGFzdHJvLmh0bWw"/><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </head>
+  <body class="p-3 m-0 border-0 bd-example m-0 border-0">
+   <!-- Inicio Modal -->
+    <div class="modal fade" id="modalpesquisar" tabindex="-1" aria-labelledby="modalpesquisarLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="modalpesquisarLabel">Tela Pesquisar</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container text-center">
+                    <div class="mb-3 row">
+                        <div class="col">
+                            <input class="form-control" type="text" name="" id="" placeholder="Pesquisar">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <div class="col">
+                            <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Matricula</th>
+                                    <th scope="col">Nome</th>
+                                    <th scope="col">Rede Social</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <th scope="row">1</th>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">2</th>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@fat</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">3</th>
+                                    <td colspan="2">Larry the Bird</td>
+                                    <td>@twitter</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+        </div>
+    </div>
+    <!-- Final Modal -->
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>ATENÇÃO!</strong> Dados excluidos com sucesso!.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+        <strong>ATENÇÃO!</strong> Dados cadastrados com sucesso!.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <div class="md-3 ps-3 px-3"> 
+      <!--
+        md-3: Esta classe Bootstrap (md-3) pertence ao sistema de grid do Bootstrap e define uma margem inferior (margin-bottom) de tamanho médio em dispositivos de tamanho médio (a partir de 768px de largura).
+        ps-3: Esta classe Bootstrap (ps-3) define um preenchimento à esquerda (padding-left) de tamanho pequeno.
+        px-3: Esta classe Bootstrap (px-3) define um preenchimento horizontal (padding-left e padding-right) de tamanho pequeno.
+
+        col-md-12 col-sm-12
+      -->
+      <p class="text-center fs-2 fw-bold fst-italic">Formulário de Cadastro.</p>
+      <div class="mb-3 text-end">
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalpesquisar" title="Pesquisar">
+              <i class="bi-search"></i> 
+          </button>
+      </div>
+      <form action="" class="form">
+          <div class="mb-3">
+              <label for="nome" class="form-label">Nome</label>
+              <input type="nome" class="form-control" id="nome" placeholder="Nome" required>
+          </div>
+          <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" placeholder="email@exemplo.com.br">
+          </div>
+          <div class="mb-3">
+              <label for="social" class="form-label">Rede Social</label>
+              <input type="social" class="form-control" id="social" placeholder="Rede Social">
+          </div>
+          <div class="mb-3 text-end">
+              <button type="button" class="btn btn-danger"><i class="bi-trash"></i> Excluir</button>
+              <button type="reset" class="btn btn-info"><i class="bi-reply"></i> Cancelar</button>
+              <button type="submit" class="btn btn-primary"><i class="bi-save"></i> Salvar</button>
+          </div>
+      </form>  
+    </div>
+  </body>
+</html>
