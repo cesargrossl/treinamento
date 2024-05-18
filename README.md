@@ -1,6 +1,6 @@
 # treinamento
 🐳 Docker Image com ambiente 🐘 PHP, 🔌 PDO, 🐬 MySQL, 🐘🔑 PhpMyAdmin, 🚀 Nginx
-Estando dentro da pasta raíz ou via terminar do vscode, execute o comando abaixo: -> docker-compose up
+Estando dentro da pasta raíz ou via terminar do vscode, execute o comando abaixo: -> docker-compose up -d
 
 Conectar 🐬 MySQL com ferramenta de manipulação como (Workbench, Dbeaver...)
     # Host (Nesse caso deve ser localhost)
