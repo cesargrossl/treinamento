@@ -65,7 +65,7 @@ services:
     ports:
       - "1433:1433"
     environment:
-      - SA_PASSWORD=5020@1223
+      - SA_PASSWORD=Cg5020@1223
       - ACCEPT_EULA=Y
 
 volumes:
