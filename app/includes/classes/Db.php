@@ -32,6 +32,7 @@ class DB {
 				return false;
 			}
 		}elseif($conexao == 'totvs'){
+			
 			$db_name = $db_name ? $db_name : DB_NAME_SQL;
 			$this->db = $db_name;
 			$db_host = $db_host ? $db_host : DB_HOST_SQL;
@@ -45,9 +46,10 @@ class DB {
     			$dbh_sql = new PDO($dsn_sql, $this->user, $this->password);
 				$dbh_sql->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     			$this->consql = $dbh_sql;
+				
     		}
     		catch ( PDOException $e ) {
-    			$e->getMessage();
+    			echo $e->getMessage();
 				return false;
     		}
 		}
@@ -62,6 +64,7 @@ class DB {
 	}
 	//06051982 SELECT FAZER POR AQUI;
 	public function select($query, $conexao="portal") {
+		//echo $this->consql; die;
 		if($conexao == 'totvs'){
 			$this->query("SET ANSI_NULLS ON", $conexao);
 			$this->query("SET ANSI_WARNINGS ON", $conexao);
