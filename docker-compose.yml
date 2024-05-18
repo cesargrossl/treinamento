@@ -23,27 +23,28 @@ services:
       - "9000:9000"
     depends_on: # Criar conexão com o container do banco de dados
       - mysql
+      - sqlserver
     environment:
       - MYSQL_USER=root 
       - MYSQL_PASS=5020@1223
 
-  #phpmyadmin
+  # phpmyadmin
   phpmyadmin:
-        build:
-            context: ./phpmyadmin
-            dockerfile: Dockerfile
-        container_name: con-phpmyadmin
-        restart: always
-        volumes:
-            - /sessions
-        ports:
-            - "8080:80"
-        links:
-            - mysql
-        environment:
-            - PMA_ARBITRARY=1 # Habilitando a opção para inserir host no login
+    build:
+      context: ./phpmyadmin
+      dockerfile: Dockerfile
+    container_name: con-phpmyadmin
+    restart: always
+    volumes:
+      - /sessions
+    ports:
+      - "8080:80"
+    links:
+      - mysql
+    environment:
+      - PMA_ARBITRARY=1 # Habilitando a opção para inserir host no login
 
-  # Serviço de banco de dados
+  # Serviço de banco de dados MySQL
   mysql:
     image: mysql:5.7.20
     container_name: con-mysql
@@ -55,5 +56,18 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=5020@1223
 
+  # Serviço de banco de dados SQL Server
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: con-sqlserver
+    volumes:
+      - "sqlserver_data:/var/opt/mssql"
+    ports:
+      - "1433:1433"
+    environment:
+      - SA_PASSWORD=YourStrong!Passw0rd
+      - ACCEPT_EULA=Y
+
 volumes:
   db_data3:
+  sqlserver_data:
