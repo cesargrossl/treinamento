@@ -27,7 +27,12 @@ services:
     environment:
       - MYSQL_USER=root 
       - MYSQL_PASS=5020@1223
-
+# Definir limites de memória para o contêiner PHP
+    deploy:
+      resources:
+        limits:
+          memory: 2g
+          # Ajuste este valor conforme necessário
   # phpmyadmin
   phpmyadmin:
     build:
