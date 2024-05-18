@@ -9,10 +9,10 @@
     define('DB_PASSWD_PORTAL',$_ENV['MYSQL_PASS']);
 
     //Sql server Totvs
-    define('DB_HOST_SQL', "");
-    define('DB_USER_SQL', "");
-    define('DB_PASS_SQL', "");
-    define('DB_NAME_SQL', "");
+    define('DB_HOST_SQL', "localhost");
+    define('DB_USER_SQL', "sa");
+    define('DB_PASS_SQL', "Cg5020@1223");
+    define('DB_NAME_SQL', "master");
 
 ?>
 
