@@ -1,3 +1,6 @@
+<?php
+  session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -99,3 +102,7 @@
     </div>
   </body>
 </html>
+
+<?php
+  session_destroy();
+?>
