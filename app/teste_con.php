@@ -1,13 +1,13 @@
 <?php
 	include("includes.php");
 	//Apenas realizar um teste de conexão
-	$qry_teste = " SELECT tes_descricao FROM tb_teste ";
+	$qry_teste = " SELECT usu_login FROM  db_persona.tb_usuarios ";
 	$db->AbreConexao('portal');
 	$qry = $db->select($qry_teste, "portal");
 	$db->FechaConexao('portal');
 	if (count($qry)) {
 		foreach ($qry as $cont_qry=>$row) {
-			echo $cont_qry.' - '.$row['tes_descricao'].'<br>';
+			echo $cont_qry.' - '.$row['usu_login'].'<br>';
 		}
 	}
 		
