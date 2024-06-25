@@ -1,3 +1,11 @@
+<?php
+  session_start();
+  if (!isset($_SESSION["logado"])){
+    echo 'ERRO 01 - Efetue novo login!';
+    die;
+  }
+  
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -38,7 +46,7 @@
               </div>
               <div class="profile_info">
                 <span>Bem vindo,</span>
-                <h2>John Doe</h2>
+                <h2><?=$_SESSION["nomeusuario"];?></h2>
               </div>
               <div class="clearfix"></div>
             </div>
@@ -90,7 +98,7 @@
                 <ul class=" navbar-right">
                   <li class="nav-item dropdown open" style="padding-left: 15px;">
                     <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                      <img src="./template/production/images/img.jpg" alt="">John Doe
+                      <img src="./template/production/images/img.jpg" alt=""><?=$_SESSION["nomeusuario"];?>
                     </a>
                     <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                       <a class="dropdown-item"  href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>

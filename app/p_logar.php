@@ -8,6 +8,7 @@
                 FROM db_persona.tb_usuarios 
                 WHERE usu_login = '".$login."' 
                 AND usu_senha = '".md5($senha)."' ";
+        //echo $qry;die;
         $db->AbreConexao('portal');
         $res_qry = $db->select($qry, "portal");
         $db->FechaConexao('portal');
@@ -16,7 +17,7 @@
                 $_SESSION["nomeusuario"] = $row['usu_nome'];
                 $_SESSION["login"] = $login;
                 $_SESSION["logado"] = 'OK';
-                echo "<script language=\"javascript\"> location.href='p_logar.php';</script>";
+                echo "<script language=\"javascript\"> location.href='p_home.php';</script>";
                 die;
             }
         }else{
