@@ -2,6 +2,7 @@
   session_start();
   if (!isset($_SESSION["logado"])){
     echo 'ERRO 01 - Efetue novo login!';
+    echo "<script type='text/javascript'>window.location.href = 'p_login.php';</script>";
     die;
     //e10adc3949ba59abbe56e057f20f883e
   }
@@ -102,7 +103,7 @@
                       <img src="./template/production/images/img.jpg" alt=""><?=$_SESSION["nomeusuario"];?>
                     </a>
                     <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item"  href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                      <a class="dropdown-item"  href="p_logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
                     </div>
                   </li>
   

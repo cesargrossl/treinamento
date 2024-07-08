@@ -39,6 +39,8 @@
                 (isset($_GET["e"])) ? $e = $_GET["e"] : $e = null;
                 if (!empty($e) && $e == 1){
                   echo '<p style="color:red;">Usuário ou senha inválidos!</p>';
+                }elseif(!empty($e) && $e == 2){
+                  echo '<p style="color:red;">Efetue um novo!</p>';
                 }
               ?>
               <div>
