@@ -2,7 +2,11 @@
   session_start();
   if (!isset($_SESSION["logado"])){
     echo 'ERRO 01 - Efetue novo login!';
-    echo "<script type='text/javascript'>window.location.href = 'p_login.php';</script>";
+    echo "<script type='text/javascript'>
+            setTimeout(function(){
+              window.location.href = 'p_login.php?e=2';
+            }, 3000);
+          </script>";
     die;
     //e10adc3949ba59abbe56e057f20f883e
   }
@@ -36,7 +40,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Personalitec</span></a>
+              <a href="p_home.php" class="site_title"><i class="fa fa-paw"></i> <span>Personalitec</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -68,14 +72,9 @@
                       <li><a href="index3.html">Dashboard3</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-cogs"></i> Configurações <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="form.html">General Form</a></li>
-                      <li><a href="form_advanced.html">Advanced Components</a></li>
-                      <li><a href="form_validation.html">Form Validation</a></li>
-                      <li><a href="form_wizards.html">Form Wizard</a></li>
-                      <li><a href="form_upload.html">Form Upload</a></li>
-                      <li><a href="form_buttons.html">Form Buttons</a></li>
+                      <li><a href="form.html">Cad Usuários</a></li>
                     </ul>
                   </li>
                 </ul>

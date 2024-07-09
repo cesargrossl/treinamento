@@ -38,9 +38,17 @@
               <?php
                 (isset($_GET["e"])) ? $e = $_GET["e"] : $e = null;
                 if (!empty($e) && $e == 1){
-                  echo '<p style="color:red;">Usuário ou senha inválidos!</p>';
+                  ?>
+                  <div class="alert alert-danger" role="alert">
+                    ATENÇÃO - Usuário ou senha inválidos!
+                  </div>
+                <?php 
                 }elseif(!empty($e) && $e == 2){
-                  echo '<p style="color:red;">Efetue um novo!</p>';
+                  ?>
+                  <div class="alert alert-danger" role="alert">
+                    ATENÇÃO - Efetue um novo login!
+                  </div>
+                <?php 
                 }
               ?>
               <div>
