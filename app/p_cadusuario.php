@@ -35,6 +35,9 @@
               <div class="clearfix"></div>
             </div>
             <div class="x_content">
+                <div class="mb-3 d-flex justify-content-end" >
+                  <button type="button" class="btn btn-info"><i class="fa fa-search"></i></button>
+                </div>
                 <div class="mb-3">
                   <label for="nomecompleto" class="form-label">Nome Completo</label>
                   <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome Completo">
@@ -47,6 +50,13 @@
                   <label for="senha" class="form-label">Senha</label>
                   <input type="password" class="form-control" id="senha" name="senha" placeholder="Senha">
                 </div>
+                <div class="mb-3 d-flex justify-content-end" >
+                  <button type="button" class="btn btn-danger">Excluir</button>
+                  <button type="button" class="btn btn-info">Cancelar</button>
+                  <button type="button" class="btn btn-success">Salvar</button>
+                </div>
+
+
             </div>
           </div>
         </div>
