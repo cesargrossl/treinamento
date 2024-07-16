@@ -1,5 +1,7 @@
 <?php
+  
   include_once("./cabecalho.php");
+
 ?>
   <!-- page content -->
   <div class="right_col" role="main">
@@ -33,7 +35,18 @@
               <div class="clearfix"></div>
             </div>
             <div class="x_content">
-                Add content to the page ...
+                <div class="mb-3">
+                  <label for="nomecompleto" class="form-label">Nome Completo</label>
+                  <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome Completo">
+                </div>
+                <div class="mb-3">
+                  <label for="login" class="form-label">Login</label>
+                  <input type="text" class="form-control" id="login" name="login" placeholder="Login">
+                </div>
+                <div class="mb-3">
+                  <label for="senha" class="form-label">Senha</label>
+                  <input type="password" class="form-control" id="senha" name="senha" placeholder="Senha">
+                </div>
             </div>
           </div>
         </div>
