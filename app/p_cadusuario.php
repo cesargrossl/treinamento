@@ -1,8 +1,10 @@
 <?php
   
   include_once("./cabecalho.php");
+  
 
 ?>
+  
 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -13,7 +15,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <table class="table">
+        <table class="table" id="datatable">
           <thead>
             <tr>
               <th>#</th>
