@@ -55,7 +55,7 @@ services:
     container_name: con-mysql
     volumes:
       - "db_data3:/var/lib/mysql"
-      - "./db:/docker-entrypoint-initdb.d"
+      - "./db/mysql:/docker-entrypoint-initdb.d"# Mapeamento do diretório local contendo o script
     ports:
       - "3306:3306"
     environment:
@@ -67,6 +67,7 @@ services:
     container_name: con-sqlserver
     volumes:
       - "sqlserver_data:/var/opt/mssql"
+      - "./db/sqlserver:/docker-entrypoint-initdb.d"  # Mapeamento do diretório local contendo o script
     ports:
       - "1433:1433"
     environment:
