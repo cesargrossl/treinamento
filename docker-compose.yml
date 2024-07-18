@@ -57,7 +57,7 @@ services:
       - "db_data3:/var/lib/mysql"
       - "./db/mysql:/docker-entrypoint-initdb.d" # Mapeamento do diretório local contendo o script
     ports:
-      - "3306:3306"clear
+      - "3306:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=5020@1223
 
