@@ -55,9 +55,9 @@ services:
     container_name: con-mysql
     volumes:
       - "db_data3:/var/lib/mysql"
-      - "./db/mysql:/docker-entrypoint-initdb.d"# Mapeamento do diretório local contendo o script
+      - "./db/mysql:/docker-entrypoint-initdb.d" # Mapeamento do diretório local contendo o script
     ports:
-      - "3306:3306"
+      - "3306:3306"clear
     environment:
       - MYSQL_ROOT_PASSWORD=5020@1223
 
