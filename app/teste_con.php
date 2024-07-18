@@ -1,13 +1,31 @@
 <?php
 	include("includes.php");
+
+	/*
+	-- Criação da tabela
+	CREATE TABLE TB_TESTE (
+		ID INT PRIMARY KEY,
+		NOME VARCHAR(250)
+	);
+
+	-- Inserção de dados
+	INSERT INTO TB_TESTE (ID, NOME) VALUES (1, 'João');
+	INSERT INTO TB_TESTE (ID, NOME) VALUES (2, 'Maria');
+	INSERT INTO TB_TESTE (ID, NOME) VALUES (3, 'Carlos');
+	INSERT INTO TB_TESTE (ID, NOME) VALUES (4, 'Ana');
+
+	SELECT TOP 10 * FROM TB_TESTE
+
+	*/
 	//Apenas realizar um teste de conexão
-	$qry_teste = " SELECT usu_login FROM  db_persona.tb_usuarios ";
-	$db->AbreConexao('portal');
-	$qry = $db->select($qry_teste, "portal");
-	$db->FechaConexao('portal');
+	$qry_teste = " SELECT TOP 10 * FROM TB_TESTE ";
+	$db->AbreConexao('totvs');
+	
+	$qry = $db->select($qry_teste, "totvs");
+	$db->FechaConexao('totvs');
 	if (count($qry)) {
 		foreach ($qry as $cont_qry=>$row) {
-			echo $cont_qry.' - '.$row['usu_login'].'<br>';
+			echo $cont_qry.' - '.$row['NOME'].'<br>';
 		}
 	}
 		

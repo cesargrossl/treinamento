@@ -41,7 +41,8 @@ class DB {
 			$this->user = $db_user;
 			$db_passwd = $db_passwd ? $db_passwd : DB_PASS_SQL;
 			$this->password = $db_passwd;
-            $dsn_sql = 'dblib:host='.$this->host.';dbname='.$this->db.';charset=LATIN-1';
+            //$dsn_sql = 'dblib:host='.$this->host.';dbname='.$this->db.';charset=LATIN-1';
+			$dsn_sql = 'dblib:host='.$this->host.';dbname='.$this->db.'';
             try {
     			$dbh_sql = new PDO($dsn_sql, $this->user, $this->password);
 				$dbh_sql->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

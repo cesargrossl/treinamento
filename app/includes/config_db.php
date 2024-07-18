@@ -9,7 +9,7 @@
     define('DB_PASSWD_PORTAL',$_ENV['MYSQL_PASS']);
 
     //Sql server Totvs
-    define('DB_HOST_SQL', "localhost:1433");
+    define('DB_HOST_SQL', "172.19.0.3");//IP PRECISA PEGAR DE DENTRO DO CONTAINER EM INSPECTOR
     define('DB_USER_SQL', "sa");
     define('DB_PASS_SQL', "Cg5020@1223");
     define('DB_NAME_SQL', "master");
