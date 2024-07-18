@@ -1,13 +1,7 @@
 -- Criar o banco de dados db_curso, se ainda não existir
-IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = 'db_curso')
-BEGIN
-    CREATE DATABASE db_curso;
-    USE db_curso;
-END
-ELSE
-BEGIN
-    USE db_curso;
-END
+
+    USE master;
+
 
 -- Criar a tabela TB_TESTE dentro do banco de dados db_curso
 IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'TB_TESTE')
