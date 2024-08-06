@@ -2,6 +2,7 @@
   
   include_once("./cabecalho.php");
   $id = null;
+  $msg = null;
   $usu_nome = null;
   $usu_login = null;
   $modo = "I";
@@ -15,13 +16,31 @@
       $usu_nome = $row["usu_nome"];
       $usu_login = $row["usu_login"];
 		}
-
 		$modo = "U"; 
-
   }
+
+  if(isset($_GET["id"]) &&  isset($_GET["del"])){
+    $qry = "	DELETE FROM db_persona.tb_usuarios WHERE usu_id =  ".$_GET["id"];
+		$db->AbreConexao('portal');
+		$rec_qry = $db->query($qry,'portal');
+		$db->FechaConexao('portal');
+  }
+
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Aqui para salvar os dados
- 
+    $modo = $_POST["modo"];
+    if ($modo == 'U'){
+      //atualizar
+
+      $msg = "Alterado com sucesso!";
+    }elseif($modo == 'I'){
+      //Inserir
+      $qry = "	INSERT INTO db_persona.tb_usuarios (usu_nome) VALUE('".$_POST["nome"]."') ";
+      $db->AbreConexao('portal');
+      $rec_qry = $db->query($qry,'portal');
+      $db->FechaConexao('portal');
+      $msg = "Inserido com sucesso!";
+    }
   }
 
 ?>
@@ -85,7 +104,7 @@
       </div>
 
       <div class="clearfix"></div>
-
+              
       <div class="row">
         <div class="col-md-12 col-sm-12  ">
           <div class="x_panel">
@@ -108,7 +127,7 @@
             </div>
             <form action="p_cadusuario.php" method="POST">
               <div class="x_content">
-                  
+              <?php echo $msg;?>
                   <input type="hidden" name="modo" value="<?=$modo?>">
 
                   <div class="mb-3 d-flex justify-content-end" >
