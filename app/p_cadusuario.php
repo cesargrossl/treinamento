@@ -3,14 +3,14 @@
   include_once("./cabecalho.php");
   $modo = "I";
   if(isset($_GET["id"])){
-   $qry = "	SELECT * FROM db_persona.tb_usuarios WHERE usu_id =  ".$_GET["id"];
+    $qry = "	SELECT * FROM db_persona.tb_usuarios WHERE usu_id =  ".$_GET["id"];
 										
-		$db->AbreConexao('tars', 'db_nucleo');
-		$rec_qry = $db->select($qry,'tars');
-		$db->FechaConexao('tars');
+		$db->AbreConexao('portal');
+		$rec_qry = $db->select($qry,'portal');
+		$db->FechaConexao('portal');
 		
 		foreach($rec_qry as $row){
-			$id = $lin_con_menu["men_id"];
+			$id = $row["usu_id"];
 		
 		}
 		$modo = "U"; 
@@ -125,7 +125,7 @@
                     <?php if ($modo == 'U'){?>
 								    <button type="button"  id="btExcluir" onClick="fc_excluir('<?php echo $id;?>')"class="btn btn-danger"><i class="fa fa-trash"></i> Excluir</button>
 								    <?php }?>
-                    <button type="button" class="btn btn-danger">Excluir</button>
+                    
                     <button type="reset" class="btn btn-info">Cancelar</button>
                     <button type="submit" class="btn btn-success">Salvar</button>
                   </div>
