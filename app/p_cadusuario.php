@@ -1,18 +1,21 @@
 <?php
   
   include_once("./cabecalho.php");
+  $id = null;
+  $usu_nome = null;
+  $usu_login = null;
   $modo = "I";
   if(isset($_GET["id"])){
     $qry = "	SELECT * FROM db_persona.tb_usuarios WHERE usu_id =  ".$_GET["id"];
-
 		$db->AbreConexao('portal');
 		$rec_qry = $db->select($qry,'portal');
 		$db->FechaConexao('portal');
-		
 		foreach($rec_qry as $row){
 			$id = $row["usu_id"];
-		
+      $usu_nome = $row["usu_nome"];
+      $usu_login = $row["usu_login"];
 		}
+
 		$modo = "U"; 
 
   }
@@ -54,7 +57,7 @@
                   <tr>
                     <th scope="row"><a href="p_cadusuario.php?id=<?=$row["usu_id"]?>"><?=$row["usu_id"]?></a></th>
                     <td><a href="p_cadusuario.php?id=<?=$row["usu_id"]?>"><?=$row["usu_nome"]?></a></td>
-                    <td><?=$row["usu_login"]?></td>
+                    <td><a href="p_cadusuario.php?id=<?=$row["usu_id"]?>"><?=$row["usu_login"]?></a></td>
                   </tr>
                   <?php
                 }
@@ -105,17 +108,19 @@
             </div>
             <form action="p_cadusuario.php" method="POST">
               <div class="x_content">
-                  <input type="text" name="modo" value="<?=$modo?>">
+                  
+                  <input type="hidden" name="modo" value="<?=$modo?>">
+
                   <div class="mb-3 d-flex justify-content-end" >
                     <button type="button" class="btn btn-info" data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-search"></i></button>
                   </div>
                   <div class="mb-3">
                     <label for="nomecompleto" class="form-label">Nome Completo</label>
-                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome Completo">
+                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome Completo" value="<?=$usu_nome?>">
                   </div>
                   <div class="mb-3">
                     <label for="login" class="form-label">Login</label>
-                    <input type="text" class="form-control" id="login" name="login" placeholder="Login">
+                    <input type="text" class="form-control" id="login" name="login" placeholder="Login" value="<?=$usu_login?>">
                   </div>
                   <div class="mb-3">
                     <label for="senha" class="form-label">Senha</label>
@@ -125,7 +130,6 @@
                     <?php if ($modo == 'U'){?>
 								    <button type="button"  id="btExcluir" onClick="fc_excluir('<?php echo $id;?>')"class="btn btn-danger"><i class="fa fa-trash"></i> Excluir</button>
 								    <?php }?>
-                    
                     <button type="reset" class="btn btn-info">Cancelar</button>
                     <button type="submit" class="btn btn-success">Salvar</button>
                   </div>

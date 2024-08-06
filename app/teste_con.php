@@ -19,8 +19,8 @@
 	*/
 	//Apenas realizar um teste de conexão
 	$qry_teste = " SELECT TOP 10 * FROM TB_TESTE ";
-	$db->AbreConexao('totvs');
 	
+	$db->AbreConexao('totvs');
 	$qry = $db->select($qry_teste, "totvs");
 	$db->FechaConexao('totvs');
 	if (count($qry)) {
