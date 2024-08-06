@@ -31,7 +31,12 @@
     $modo = $_POST["modo"];
     if ($modo == 'U'){
       //atualizar
-
+      $qry = "	UPDATE  db_persona.tb_usuarios SET usu_nome = '".$_POST["nome"]."' 
+                WHERE usu_id =  ".$_POST["id"];
+      //echo $qry;die;          
+      $db->AbreConexao('portal');
+      $rec_qry = $db->query($qry,'portal');
+      $db->FechaConexao('portal');
       $msg = "Alterado com sucesso!";
     }elseif($modo == 'I'){
       //Inserir
@@ -129,6 +134,7 @@
               <div class="x_content">
               <?php echo $msg;?>
                   <input type="hidden" name="modo" value="<?=$modo?>">
+                  <input type="hidden" name="id" value="<?=$id?>">
 
                   <div class="mb-3 d-flex justify-content-end" >
                     <button type="button" class="btn btn-info" data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-search"></i></button>
