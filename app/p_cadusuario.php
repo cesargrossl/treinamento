@@ -4,7 +4,7 @@
   $modo = "I";
   if(isset($_GET["id"])){
     $qry = "	SELECT * FROM db_persona.tb_usuarios WHERE usu_id =  ".$_GET["id"];
-										
+
 		$db->AbreConexao('portal');
 		$rec_qry = $db->select($qry,'portal');
 		$db->FechaConexao('portal');
@@ -105,7 +105,7 @@
             </div>
             <form action="p_cadusuario.php" method="POST">
               <div class="x_content">
-                  <input type="text" value="<?=$modo?>">
+                  <input type="text" name="modo" value="<?=$modo?>">
                   <div class="mb-3 d-flex justify-content-end" >
                     <button type="button" class="btn btn-info" data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-search"></i></button>
                   </div>
