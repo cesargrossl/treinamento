@@ -5,6 +5,7 @@
   $msg = null;
   $usu_nome = null;
   $usu_login = null;
+  $usu_senha = null;
   $modo = "I";
   if(isset($_GET["id"])){
     $qry = "	SELECT * FROM db_persona.tb_usuarios WHERE usu_id =  ".$_GET["id"];
@@ -15,6 +16,7 @@
 			$id = $row["usu_id"];
       $usu_nome = $row["usu_nome"];
       $usu_login = $row["usu_login"];
+      $usu_senha = $row["usu_senha"];
 		}
 		$modo = "U"; 
   }
@@ -24,27 +26,40 @@
 		$db->AbreConexao('portal');
 		$rec_qry = $db->query($qry,'portal');
 		$db->FechaConexao('portal');
+    $msg = '<div class="alert alert-danger" role="alert">
+              Excluido com sucesso!
+            </div>';
   }
 
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Aqui para salvar os dados
     $modo = $_POST["modo"];
+    $atu_senha = null;
     if ($modo == 'U'){
       //atualizar
-      $qry = "	UPDATE  db_persona.tb_usuarios SET usu_nome = '".$_POST["nome"]."' 
+      if (!empty($_POST["senha"])){
+        $atu_senha = "	, usu_senha = '".md5($_POST["senha"])."' ";
+      }
+      $qry = "	UPDATE  db_persona.tb_usuarios 
+                SET usu_nome = '".$_POST["nome"]."', usu_login = '".$_POST["login"]."' $atu_senha 
                 WHERE usu_id =  ".$_POST["id"];
       //echo $qry;die;          
       $db->AbreConexao('portal');
       $rec_qry = $db->query($qry,'portal');
       $db->FechaConexao('portal');
-      $msg = "Alterado com sucesso!";
+      $msg = '<div class="alert alert-primary" role="alert">
+                Alterado com sucesso!
+              </div>';
     }elseif($modo == 'I'){
       //Inserir
-      $qry = "	INSERT INTO db_persona.tb_usuarios (usu_nome) VALUE('".$_POST["nome"]."') ";
+      $qry = "	INSERT INTO db_persona.tb_usuarios (usu_nome, usu_login, usu_senha) VALUE('".$_POST["nome"]."', '".$_POST["login"]."', '".md5($_POST["senha"])."') ";
+      //echo $qry;die;
       $db->AbreConexao('portal');
       $rec_qry = $db->query($qry,'portal');
       $db->FechaConexao('portal');
-      $msg = "Inserido com sucesso!";
+      $msg = '<div class="alert alert-primary" role="alert">
+               Inserido com sucesso!
+              </div>';
     }
   }
 
@@ -149,17 +164,15 @@
                   </div>
                   <div class="mb-3">
                     <label for="senha" class="form-label">Senha</label>
-                    <input type="password" class="form-control" id="senha" name="senha" placeholder="Senha">
+                    <input type="password" class="form-control" id="senha" name="senha" placeholder="Senha" >
                   </div>
                   <div class="mb-3 d-flex justify-content-end" >
                     <?php if ($modo == 'U'){?>
 								    <button type="button"  id="btExcluir" onClick="fc_excluir('<?php echo $id;?>')"class="btn btn-danger"><i class="fa fa-trash"></i> Excluir</button>
 								    <?php }?>
-                    <button type="reset" class="btn btn-info">Cancelar</button>
+                    <button type="button"  id="btCancelar" onClick="fc_cancelar()"class="btn btn-info">Cancelar</button>
                     <button type="submit" class="btn btn-success">Salvar</button>
                   </div>
-
-
               </div>
             </form>  
           </div>
@@ -180,4 +193,8 @@
         window.location.href = "<?php echo $_SERVER["PHP_SELF"];?>?del=1&id="+id;
       }
     };
+
+    function fc_cancelar(){
+      window.location.href = "<?php echo $_SERVER["PHP_SELF"];?>";
+    }
   </script>  
